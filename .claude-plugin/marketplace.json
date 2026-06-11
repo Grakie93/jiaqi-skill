@@ -1,0 +1,22 @@
+{
+  "name": "jiaqi-skill",
+  "owner": {
+    "name": "Grakie93"
+  },
+  "metadata": {
+    "description": "A collection of Claude Code skills for daily work",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "jiaqi-skill",
+      "description": "Skills bundled in the jiaqi-skill marketplace plugin",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/jiaqi-format-text",
+        "./skills/jiaqi-url-to-markdown"
+      ]
+    }
+  ]
+}

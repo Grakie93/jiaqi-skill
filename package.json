@@ -1,0 +1,20 @@
+{
+  "name": "jiaqi-skill",
+  "version": "0.1.0",
+  "description": "A collection of Claude Code skills for daily work",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@mozilla/readability": "0.5.0",
+    "jsdom": "24.1.1",
+    "turndown": "7.2.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "21.1.7",
+    "@types/turndown": "5.0.5"
+  }
+}
