@@ -1,40 +1,41 @@
 ---
 name: jiaqi-xhs-image
-description: Generates Xiaohongshu-style vertical images (3:4) from a text prompt and style preset, using whichever image API key the user has configured (DashScope, OpenAI, or Replicate). Use it when the user asks to "生成内页图", "帮我出配图", "生成小红书图片", or after jiaqi-xhs-text produces a 【配图方向】section and the user wants to turn those briefs into actual images.
-version: 0.1.0
+description: Turns each section of a Xiaohongshu post into a poster-style note image with the text rendered directly inside, in a 3:4 vertical format ready to publish. Use it when the user asks to "帮我出笔记图", "把这段文案做成海报", "生成小红书内页图", "出图", or after jiaqi-xhs-text produces body sections and the user wants each section turned into a poster image.
+version: 0.1.1
 ---
 
 # jiaqi-xhs-image
 
-Generates vertical (3:4) images in a Xiaohongshu visual style. Works with whatever API key the user has set up — DashScope, OpenAI DALL-E 3, or Replicate. Automatically detects which key is available.
+Generates vertical (3:4) poster-note images where **the post copy is rendered as part of the image itself** — styled like a Xiaohongshu note card. Takes the body sections from `jiaqi-xhs-text` (or any text the user provides) and produces one poster image per section, ready to upload.
+
+> **Note on Chinese text rendering**: Image AI models can occasionally misrender Chinese characters. If any text looks garbled, regenerate that image once or twice — it usually corrects itself.
 
 ## When to trigger
 
-- User says: "生成内页图"、"帮我出图"、"配图"、"生成小红书图片"、"把配图方向变成图"
-- User just finished running `jiaqi-xhs-text` and the output includes a 【配图方向】section
-- User provides a visual scene description and asks for an image
+- User says: "帮我出笔记图"、"把这段文案做成海报"、"生成内页图"、"出图"、"配图"
+- User just ran `jiaqi-xhs-text` and wants the body sections turned into images
+- User provides a block of text and asks to make it into a note-style image
 
 Do not trigger when:
 
-- The user wants a cover image with text/title overlaid (that requires design tools, not just image generation)
+- The user only wants a plain background illustration with no text in it
 - No API key is configured — tell the user which key to set first
 
 ## User Input Tools
 
-Before calling the script, confirm these inputs. If the user already provided them, skip those questions. Combine into a single prompt if multiple inputs are needed.
+Before calling the script, confirm these inputs. If they were already provided, skip. Combine into a single prompt if multiple inputs are missing.
 
 | Input | Description | Default |
 |-------|-------------|---------|
-| 图片描述 | The scene description (use 【配图方向】from jiaqi-xhs-text if available) | Required |
+| 内容文字 | The text to render — one section from 【正文】per image | Required |
 | 风格 | warm / minimal / bold | warm |
-| 张数 | How many images (1–4) | matches image count from jiaqi-xhs-text, else 1 |
-| 保存路径 | Where to save the file(s) | `./xhs-image-01.png` in current dir |
+| 保存路径 | Where to save the file(s) | `./xhs-poster-01.png` in current dir |
 
 Style guide:
 
-- **warm** — soft lighting, pastel tones, cozy lifestyle feel (best for beauty, food, daily life)
-- **minimal** — clean backgrounds, simple composition, muted palette (best for productivity, fashion)
-- **bold** — vivid colors, strong contrast, graphic pop (best for travel, events, promotions)
+- **warm** — creamy/off-white background, hand-drawn decorative elements, warm serif or rounded font feel; best for beauty, food, daily life
+- **minimal** — pure white or light grey background, thin line accents, clean sans-serif layout; best for productivity, fashion, lifestyle tips
+- **bold** — vibrant gradient or color-block background, geometric accents, high contrast; best for travel, promotions, punchy statements
 
 ## EXTEND.md support
 
@@ -82,25 +83,28 @@ Options:
 - `-n, --count <n>` — number of images, max 4 (default: 1)
 - `-o, --output <path>` — save path; multi-image appends `-01`, `-02`…
 
+## Poster prompt template
+
+For each section, build the prompt using this template:
+
+```
+小红书风格笔记海报，竖版3:4比例，图片中央清晰排版以下文字：
+"{段落文字}"
+背景风格：{style_description}
+文字清晰可读，字体与背景协调，精致排版，高质量
+```
+
+Style descriptions to substitute:
+
+- **warm**: 奶油色暖调背景，手绘风格装饰小元素，温馨氛围
+- **minimal**: 纯白或浅灰背景，细线条装饰，简洁现代排版
+- **bold**: 鲜明渐变色块背景，几何装饰元素，视觉冲击力强
+
 ## Process
 
-1. **Check EXTEND.md** — apply any platform or style overrides.
-2. **Collect inputs** — confirm prompt, style, count, output path in a single question if anything is missing.
-3. **Build one prompt per image** — take the scene description from user or from 【配图方向】, append the style descriptor. For multi-image runs, keep prompts thematically consistent but vary the composition (close-up / mid-shot / wide).
-4. **Run the script** — call once per image (or use `--count` for batch). Wait for each to complete.
-5. **Report results** — list saved file paths. Offer to regenerate any image the user isn't happy with.
-
-## Prompt writing tips
-
-For best results with Chinese lifestyle content, describe:
-
-- **Subject** — what the main object/person is doing
-- **Setting** — indoor/outdoor, specific location
-- **Lighting** — natural light, golden hour, soft studio
-- **Color mood** — match the tone of the post (warm oranges for autumn, cool greens for lifestyle)
-
-Example prompt feeding from jiaqi-xhs-text 【配图方向】:
-
-> 暖光咖啡桌，马克杯旁摆着一本翻开的书，秋叶散落，莫兰迪棕色调
-
-→ Pass this directly as `--prompt`.
+1. **Check EXTEND.md** — apply any platform, style, or prompt-suffix overrides.
+2. **Extract text sections** — if coming from `jiaqi-xhs-text`, take each paragraph from 【正文】as one image's content. If the user provides text directly, split by the natural paragraph breaks.
+3. **Collect remaining inputs** — style and save path in a single question if missing.
+4. **Build one prompt per section** — fill the template above with the section text and style description.
+5. **Run the script** — call once per section, passing `--prompt` and `--output` with an incremented filename (`xhs-poster-01.png`, `xhs-poster-02.png`…).
+6. **Report results** — list saved paths. If any image has garbled text, offer to regenerate just that one.

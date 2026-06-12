@@ -77,12 +77,12 @@ If found, read it and surface a one-line summary. EXTEND.md may override: defaul
 - No spaces inside a tag
 - Format: `#tag` separated by spaces
 
-### Visual brief
+### 海报风格建议
 
-One line per image, written as a concise scene description for the image generator. Keep it visual, not conceptual.
+One line per image: a brief style note (mood, color tone) that `jiaqi-xhs-image` will use as background style context. Do NOT write scene descriptions — the text content of each section is the poster content.
 
-- Good: `暖光咖啡桌，马克杯旁摆着一本翻开的书，莫兰迪色调`
-- Bad: `代表放松和自我提升的概念图`
+- Good: `暖奶油色调，手绘小花装饰`
+- Bad: `暖光咖啡桌，马克杯旁摆着一本书`（这是场景描述，不是风格）
 
 ## Output format
 
@@ -103,10 +103,10 @@ Return the post in this exact structure (use these exact headers):
 【话题标签】
 #tag1 #tag2 #tag3 ...
 
-【配图方向】
-图1：<visual brief>
-图2：<visual brief>
-图3：<visual brief>
+【海报风格建议】
+图1：<one-line style note>
+图2：<one-line style note>
+图3：<one-line style note>
 ...
 ```
 
@@ -117,4 +117,4 @@ Do not add any commentary before or after this block.
 1. **Collect inputs** — ask for any missing required fields using a single combined prompt.
 2. **Check EXTEND.md** — apply any persona overrides or banned words.
 3. **Plan structure** — decide the narrative arc for N sections before writing.
-4. **Write and output** — produce the full post in the format above. The 【配图方向】section feeds directly into `jiaqi-xhs-image`.
+4. **Write and output** — produce the full post in the format above. 【正文】sections feed directly into `jiaqi-xhs-image` as poster text; 【海报风格建议】feeds as background style context.
