@@ -17,6 +17,11 @@ A collection of Claude Code skills for daily work.
 - **jiaqi-format-text** — Cleans up mixed Chinese-English text: adds spaces between CJK and Latin, normalizes punctuation, collapses extra whitespace.
 - **jiaqi-url-to-markdown** — Fetches a URL and returns the main article as clean Markdown (strips nav/ads/sidebar via Readability).
 
+### Xiaohongshu (小红书)
+
+- **jiaqi-xhs-text** — Writes a complete Xiaohongshu post from a persona and topic: title with emoji, structured body, hashtags, and a visual brief per image.
+- **jiaqi-xhs-image** — Generates vertical 3:4 images from a scene description using your choice of API (DashScope, OpenAI, or Replicate).
+
 ## First-time setup
 
 ```bash
