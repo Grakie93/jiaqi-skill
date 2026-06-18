@@ -20,6 +20,7 @@ A collection of Claude Code skills for daily work.
 ### Writing
 
 - **jiaqi-article** — Writes long-form analytical articles for tech blogs and WeChat public accounts. Macro industry analysis, policy/supply-chain framing, business logic, plain and precise Chinese. Targets investors, founders, and engineers.
+- **jiaqi-repurpose** — Repurposes a finished article into platform-ready versions: Xiaohongshu note, WeChat Moments post, Weibo, X/Twitter thread, and LinkedIn article. Xiaohongshu output chains directly into `jiaqi-xhs-image`.
 
 ### Xiaohongshu (小红书)
 
