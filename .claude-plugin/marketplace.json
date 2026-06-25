@@ -18,6 +18,7 @@
         "./skills/jiaqi-url-to-markdown",
         "./skills/jiaqi-xhs-text",
         "./skills/jiaqi-xhs-image",
+        "./skills/jiaqi-xhs-persona",
         "./skills/jiaqi-article",
         "./skills/jiaqi-repurpose"
       ]

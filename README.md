@@ -25,6 +25,7 @@ A collection of Claude Code skills for daily work.
 ### Xiaohongshu (小红书)
 
 - **jiaqi-xhs-text** — Writes a complete Xiaohongshu post from a persona and topic: title with emoji, structured body, hashtags, and a visual brief per image.
+- **jiaqi-xhs-persona** — Writes Xiaohongshu posts in six predefined persona voices (专业靠谱型、温柔贴心型、爽快高效型、生活顾问型、理财达人型、热心资源型). Each persona has distinct language patterns, emoji usage, and framing.
 - **jiaqi-xhs-image** — Generates vertical 3:4 images from a scene description using your choice of API (DashScope, OpenAI, or Replicate).
 
 ## First-time setup
