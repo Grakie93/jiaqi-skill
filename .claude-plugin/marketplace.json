@@ -20,6 +20,7 @@
         "./skills/jiaqi-xhs-image",
         "./skills/jiaqi-xhs-persona",
         "./skills/jiaqi-topics",
+        "./skills/jiaqi-comment",
         "./skills/jiaqi-article",
         "./skills/jiaqi-repurpose"
       ]
