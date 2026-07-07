@@ -18,6 +18,7 @@ English | [中文](./README.zh-CN.md)
 
 - **jiaqi-format-text** — Cleans up mixed Chinese-English text: adds spaces between CJK and Latin, normalizes punctuation, collapses extra whitespace.
 - **jiaqi-url-to-markdown** — Fetches a URL and returns the main article as clean Markdown (strips nav/ads/sidebar via Readability).
+- **jiaqi-research** — Synthesizes multiple articles into a structured research report (competitive analysis, policy landscape, supply chain breakdown, or market overview). Cites sources inline and flags conflicts.
 
 ### Writing
 

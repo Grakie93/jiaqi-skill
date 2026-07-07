@@ -16,6 +16,7 @@
       "skills": [
         "./skills/jiaqi-format-text",
         "./skills/jiaqi-url-to-markdown",
+        "./skills/jiaqi-research",
         "./skills/jiaqi-xhs-text",
         "./skills/jiaqi-xhs-image",
         "./skills/jiaqi-xhs-persona",
