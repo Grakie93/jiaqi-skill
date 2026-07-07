@@ -1,6 +1,8 @@
 # jiaqi-skill
 
-A collection of Claude Code skills for daily work.
+A collection of Claude Code skills for content creation and daily work.
+
+English | [中文](./README.zh-CN.md)
 
 ## Install
 
@@ -48,6 +50,20 @@ jiaqi-skill/
 ├── docs/                    # Authoring docs (repo-internal)
 ├── CLAUDE.md                # Project guide for Claude Code
 └── README.md
+```
+
+## Complete workflow example
+
+```
+jiaqi-topics (generate topic ideas)
+    ↓
+jiaqi-article / jiaqi-xhs-persona (write content)
+    ↓
+jiaqi-repurpose (distribute to platforms)
+    ↓
+jiaqi-xhs-image (Xiaohongshu poster images)
+    ↓
+jiaqi-comment (handle comment section)
 ```
 
 ## License
